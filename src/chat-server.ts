@@ -1,4 +1,4 @@
-import { createServer, Server } from 'http';
+import { createServer, Server } from 'https';
 import * as express from 'express';
 import * as socketIo from 'socket.io';
 
@@ -24,7 +24,12 @@ export class ChatServer {
     }
 
     private createServer(): void {
-        this.server = createServer(this.app);
+        this.server = createServer(
+            {
+                key: '/etc/letsencrypt/live/app.lesgermes.tk/privkey.pem', 
+                cert: '/etc/letsencrypt/live/app.lesgermes.tk/cert.pem'
+            }, 
+            this.app);
     }
 
     private config(): void {
