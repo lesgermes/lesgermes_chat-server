@@ -1,6 +1,7 @@
 import { createServer, Server } from 'https';
 import * as express from 'express';
 import * as socketIo from 'socket.io';
+var fs = require('fs');
 
 import { Message } from './models/Message.model';
 
@@ -26,8 +27,8 @@ export class ChatServer {
     private createServer(): void {
         this.server = createServer(
             {
-                key: '/etc/letsencrypt/live/app.lesgermes.tk/privkey.pem', 
-                cert: '/etc/letsencrypt/live/app.lesgermes.tk/cert.pem'
+                key: fs.readFileSync('../cert/csr.pem', 'utf8'), 
+                cert: fs.readFileSync('../cert/server.crt', 'utf8')
             }, 
             this.app);
     }
