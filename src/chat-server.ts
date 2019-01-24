@@ -27,8 +27,9 @@ export class ChatServer {
     private createServer(): void {
         this.server = createServer(
             {
-                key: fs.readFileSync('../cert/csr.pem', 'utf8'), 
-                cert: fs.readFileSync('../cert/server.crt', 'utf8')
+                key: fs.readFileSync('/etc/letsencrypt/live/app.lesgermes.tk/privkey.pem', 'utf8'), 
+                cert: fs.readFileSync('/etc/letsencrypt/live/app.lesgermes.tk/cert.pem', 'utf8'),
+                ca: fs.readFileSync('/etc/letsencrypt/live/app.lesgermes.tk/chain.pem', 'utf8')
             }, 
             this.app);
     }
